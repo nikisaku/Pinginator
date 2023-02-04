@@ -1,9 +1,13 @@
 import discord
+import os
 
-TOKEN = 'your_discord_bot_token'
+from dotenv import load_dotenv
 
+load_dotenv()
+TOKEN = os.getenv('DISCORD_TOKEN')
 
 class MyClient(discord.Client):
+
     async def on_ready(self):
         print('Logged on as', self.user)
 
@@ -16,7 +20,9 @@ class MyClient(discord.Client):
         async def on_message(message):
             if client.user.mentioned_in(message):
                 await message.channel.send(f'{message.author.mention} https://www.youtube.com/watch?v=fPq60AoPPlo')
+                print(f'Pinged {message.author.name} in the server {message.guild.name} for a message in the #{message.channel.name}')
+                 
 
 
-client = MyClient()
+client = MyClient(intents=discord.Intents.default())
 client.run(TOKEN)
