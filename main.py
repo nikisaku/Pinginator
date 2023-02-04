@@ -1,9 +1,11 @@
 import discord
 import os
 
+from datetime import datetime as dt
 from dotenv import load_dotenv
 
 load_dotenv()
+CURRENT_TIME = dt.now().strftime('%Y-%m-%d %H:%M:%S')
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 class MyClient(discord.Client):
@@ -20,7 +22,7 @@ class MyClient(discord.Client):
         async def on_message(message):
             if client.user.mentioned_in(message):
                 await message.channel.send(f'{message.author.mention} https://www.youtube.com/watch?v=fPq60AoPPlo')
-                print(f'Pinged {message.author.name} in the server {message.guild.name} for a message in the #{message.channel.name}')
+                print(f'{CURRENT_TIME} - Pinged {message.author.name} in the server {message.guild.name} for a message in the #{message.channel.name}')
                  
 
 
