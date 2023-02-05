@@ -1,11 +1,13 @@
 import discord
 import os
+import pytz
 
 from datetime import datetime as dt
 from dotenv import load_dotenv
 
 load_dotenv()
-CURRENT_TIME = dt.now().strftime('%Y-%m-%d %H:%M:%S')
+timezone = pytz.timezone('Europe/Warsaw')
+CURRENT_TIME = dt.now(timezone).strftime('%Y-%m-%d %H:%M:%S')
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 class MyClient(discord.Client):
